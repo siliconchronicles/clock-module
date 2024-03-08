@@ -37,7 +37,7 @@ clko = !hlt & ((clki & deb_mauto) # (deb_push & ff_hold));
 zero = 'b'0;
 
 /* SR-latch logic (set priority). Q' = S # (!R & Q) */
-deb_mauto = mauto # (!mman # deb_mauto);  
+deb_mauto = mauto # (!mman & deb_mauto);  
 deb_mman = !deb_mauto;
 
 /* SR-latch logic. set priority */
