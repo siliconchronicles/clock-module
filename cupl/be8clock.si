@@ -1,0 +1,30 @@
+Name     be8clock ;
+PartNo   00 ;
+Date     07/03/2024 ;
+Revision 01 ;
+Designer Dani ;
+Company  N/A ;
+Assembly None ;
+Location  ;
+Device   g16v8a;
+
+ORDER: clk, clki, oe, %2, push, mman, mauto, hlt, %2, clko, clkled, zero, %2, deb_mman, deb_mauto, ff_hold;
+
+VECTORS:
+
+ C10 1011 NNN NNZ  /* oe: ff_hold is Z */  
+ C11 1011 LLL NNL  /* halt: output is low */  
+ C11 0010 HHL LHL  /* auto mode: clk out is clock in */
+ C01 0010 LLL LHL  /* auto mode: clk out is clock in */
+ C01 1010 LLL LHL  /* auto mode: clk out is clock in, ignore push button */
+ C01 0000 LLL LHL  /* auto mode: debounced switch, mode stays */
+ C01 0010 LLL LHL  /* auto mode: debounced switch, mode stays */
+ C01 0100 LLL HLL  /* manual mode: switch */
+ C01 0000 LLL HLL  /* manual mode: switch debounce */
+ C01 0100 LLL HLL  /* manual mode: switch */
+ C11 0100 LLL HLL  /* manual mode: clki does not raise it */
+ C11 1100 HHL HLH  /* manual mode: push button triggers output */
+ C11 1100 HHL HLH  /* manual mode: push button holds output */
+ C11 1100 HHL HLH  /* manual mode: push button holds output (again) */
+ C11 0100 LLL HLL  /* manual mode: release releases latch */
+ C11 0010 HHL LHL  /* switch back to auto mode */
