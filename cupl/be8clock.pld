@@ -1,0 +1,45 @@
+Name     be8clock ;
+PartNo   00 ;
+Date     07/03/2024 ;
+Revision 01 ;
+Designer Dani ;
+Company  N/A ;
+Assembly None ;
+Location  ;
+Device   g16v8a;
+
+/* *************** INPUT PINS *********************/
+PIN 1 = clk ;    /* 555 based clock */
+PIN 2 = clki ;    /* tied to pin 1; clk can not be used in formula */
+PIN 3 = push ;    /* push-button: trigger clock pulse */ 
+PIN 4 = !mman ;   /* toggle set to manual */ 
+PIN 5 = !mauto  ; /* toggle set to auto */ 
+PIN 9 = hlt ;     /* halt clock */ 
+
+/* standard pin*/
+PIN 11 = !oe ;
+
+/* *************** OUTPUT PINS *********************/
+PIN 12 = clko ;   /* clk output */ 
+PIN 13 = clkled ; /* clk led indicator */ 
+
+/* technically output, but mostly for internal feedback */
+PIN 14 = deb_mauto ; /* debounced mauto */
+PIN 15 = zero     ; /* shared ground for indicator LEDs */
+PIN 16 = deb_mman ;  /* debounced mman */
+PINNODE 17 = deb_push ;  /* debounced push */
+PINNODE 19 = ff_hold ; /* hold while waiting for clock after push */
+
+/* EQUATIONS */
+
+clkled = clko ;
+clko = !hlt & ((clki & deb_mauto) # (deb_push & ff_hold));
+zero = 'b'0;
+
+/* SR-latch logic (set priority). Q' = S # (!R & Q) */
+deb_mauto = mauto # (!mman # deb_mauto);  
+deb_mman = !deb_mauto;
+
+/* SR-latch logic. set priority */
+deb_push = (push & deb_mman) # (!ff_hold & deb_push); 
+ff_hold.d = deb_push;
