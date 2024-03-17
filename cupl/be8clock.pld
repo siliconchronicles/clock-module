@@ -33,7 +33,7 @@ PINNODE 19 = ff_hold ; /* hold while waiting for clock after push */
 /* EQUATIONS */
 
 clkled = clko ;
-clko = !hlt & ((clki & deb_mauto) # (deb_push & ff_hold));
+clko = !hlt & ((clki & deb_mauto) # (deb_mman & (deb_push # ff_hold)));
 zero = 'b'0;
 
 /* SR-latch logic (set priority). Q' = S # (!R & Q) */
