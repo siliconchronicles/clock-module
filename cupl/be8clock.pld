@@ -2,7 +2,7 @@ Name     be8clock ;
 PartNo   00 ;
 Date     07/03/2024 ;
 Revision 01 ;
-Designer Dani ;
+Designer Daniel F. Moisset ;
 Company  N/A ;
 Assembly None ;
 Location  ;
@@ -24,9 +24,9 @@ PIN 12 = clko ;   /* clk output */
 PIN 13 = clkled ; /* clk led indicator */ 
 
 /* technically output, but mostly for internal feedback */
-PIN 14 = deb_mauto ; /* debounced mauto */
+PIN 14 = deb_mman ; /* debounced mman */
 PIN 15 = zero     ; /* shared ground for indicator LEDs */
-PIN 16 = deb_mman ;  /* debounced mman */
+PIN 16 = deb_mauto ;  /* debounced mauto */
 PINNODE 17 = deb_push ;  /* debounced push */
 PINNODE 19 = ff_hold ; /* hold while waiting for clock after push */
 
