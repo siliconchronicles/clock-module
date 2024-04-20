@@ -20,8 +20,8 @@ PIN 9 = hlt ;     /* halt clock */
 PIN 11 = !oe ;
 
 /* *************** OUTPUT PINS *********************/
-PIN 12 = clko ;   /* clk output */ 
-PIN 13 = clkled ; /* clk led indicator */ 
+PIN 12 = clkled ; /* clk led indicator */ 
+PIN 13 = clko ;   /* clk output */ 
 
 /* technically output, but mostly for internal feedback */
 PIN 14 = deb_mman ; /* debounced mman */
