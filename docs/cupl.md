@@ -2,8 +2,7 @@
 
 The CUPL source for the ATF16v8 module is in this repo here: [be8clock.pld](https://github.com/siliconchronicles/clock-module/blob/main/cupl/be8clock.pld)
 
-The following text provides some explanation about what functionality is implemented in
-this file and how does it work.
+The following text explains the functionality implemented in this file and how it works.
 
 ## What the module does
 
@@ -13,18 +12,16 @@ The functionality implemented in this module includes:
 * Accepts (and debounces) input from the mode toggle switch
 * Accepts (and debounces) input for the single-step push button
 * Receives a HALT signal
-* Providing the output clock in two pins. One is used for the blue LED, the other for
+* Providing the output clock in two pins. One is used for the blue LED, and the other is for
   the clock connector.
-    * Output is low if halted
+    * Output is low if halted.
     * Output copies the input clock in automatic mode
     * In manual mode, output is set while pushing the button, and cleared once a full
-      cycle (2 rising edges) of the input clock go past with the released button.
+      cycle (2 rising edges) of the input clock passes with the released button.
       Note that the length of this pulse is still controlled by the potentiometer.
 * Generates output signals for the mode indicator LEDs
 
 ## Implementation details
-
-This section explains what's in the CUPL file and how it works
 
 ### Input signals
 
@@ -39,26 +36,26 @@ PIN 5 = !mauto  ; /* toggle set to auto */
 PIN 9 = hlt ;     /* halt clock */ 
 ```
 
-Pin 1 is standard the clock input for the ATF16V8 flipflops. However the value on pin 1
-can not be used as an input for logic gates if using it as a clock, so The input clock is
+Pin 1 is the standard clock input for the ATF16V8 flip-flops. However, the value on pin 1
+can not be used as an input for logic gates if it is used as a clock, so the input clock is
 connected to pin 2 (both pins are bridged together).
 
 Pin 3 is attached to the push buttons (which defaults to a low value with a 10K pull-down,
 and pressing it drives it to Vcc).
 
 Pins 4 and 5 are attached to the two end terminals of the mode switch. The common point of
-the switch is attached to ground, and both switches have a 10K pull-up. Which means that
+the switch is attached to the ground, and both switches have a 10K pull-up. This means that
 one side will go high and the other low when switching. The names of the input signals
 are `mman` ("mode=manual", for single-step) or `mauto` ("mode=automatic" for running
 oscillator).
 
-The exclamation mark in the pin definitions indicates that the signals are active low. Note that
+The exclamation mark in the pin definitions indicates that the signals are active-low. Note that
 in logic formulas used later, using a name as `mauto` will be interpreted as "the signal `mauto`
 is active" (i.e. low), not to be confused with "the signal `mauto` is high". CUPL focuses
-on providing formulas based on logic, and leaving the active high/active low as
+on providing formulas based on logic and leaving the active-high/active-low decision as
 implementation details in the pin definitions.
 
-Pin 9 is the HALT signal
+Pin 9 is the HLT (halt) signal.
 
 The ATF16V8B has three-state functionality that I'm not using. The "output-enable" pin is
 always pin 11 and needs to be defined in the CUPL file:
@@ -71,9 +68,10 @@ PIN 11 = !oe ;
 
 The mode switch can have (as any mechanical switch) some bouncing, so the circuit can not
 rely directly on pins 4 and 5 to identify the mode. There could be states while the switch
-is moving that none of them are active. To ensure a single mode is selected at any time we
-use the PLD cells to implement a SR-latch (set/reset latch). When the switch gets a known
-position that is used as a set or reset signal. while the switch is traveling or bouncing,
+is moving that none of them are active. I used the PLD cells to implement a SR-latch 
+(set/reset latch) that is set/reset based on the mode. This ensures that a single mode
+is selected at any time. When the switch gets a known
+position, that event is used as a set or reset signal. While the switch travels or bounces,
 the latch will keep its current state.
 
 Note that the state of a set/reset latch can be defined as the following logic formula:
@@ -82,8 +80,8 @@ Note that the state of a set/reset latch can be defined as the following logic f
 Notes:
 * The formula above uses the CUPL syntax where `#` means "or", `&` means "and", and `!`
   means "not".
-* `Q'` is the "next state", `Q` is the current state. `S` is the "set" signal, `R` is "reset".
-* You can then read the formula above as "the SR-latch will be high either only if it's being set,
+* `Q'` is the "next state", and `Q` is the current state. `S` is the "set" signal, and `R` is "reset".
+* You can then read the formula above: "the SR-latch will be high either only if it's being set,
   or if it was already high and not being reset.
 
 With that, we can build the following pieces of the CUPL file defining the latches as
@@ -104,8 +102,8 @@ zero = 'b'0;
 The name `deb_mauto` means "debounced mode=automatic". An active `mauto` signal will be
 the "set" operation in the latch. An active `mman` signal will be the "reset" operation.
 
-The name `deb_mman` means "debounced mode=manual". Another latch for this is not required,
-it's always the opossite of `deb_mauto`. This guarantees that consistently exactly one of
+The name `deb_mman` means "debounced mode=manual". I don't need another latch for this
+signal. It's always the opposite of `deb_mauto`. Doing this guarantees that consistently exactly one of
 the `deb_xxx` signals will be active at any given time.
 
 These two signals are sent to pins 14 and 16 which are used for the mode indicator LEDs
@@ -191,7 +189,7 @@ If you desire slightly different functionalities, these are some simple changes 
 can make:
 
 * You can remove the hlt signal and references to it if you don't need a halt
-* You can define the PIN 9 as !hlt to make the halt signal active low instead of active
+* You can define the PIN 9 as !hlt to make the halt signal active-low instead of active
   high.
 * You can define PIN 18 as a negation of the clock output line, which allows you to
   have a negative phase clock.

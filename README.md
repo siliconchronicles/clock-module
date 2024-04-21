@@ -7,17 +7,17 @@ sequential digital circuits.
 ![Picture of clock module](docs/pictures/module-photo.jpg)
 
 I call this a "debugging" clock because it's not meant to run regularly and fast. Instead,
-it allows me adjust its speed on the fly (by turning a small knob) and to step-by-step
+it allows me to adjust its speed on the fly (by turning a small knob) and to step-by-step
 the circuit it's connected to.
 
 You can see a quick demo of it in action on [my YouTube channel](https://www.youtube.com/@dmoisset)
 
 Its main features are:
 
-* Two-mode selector (automatic or single-step) with indicators
-* Adjustable frequency control (0.7Hz to 480Hz). The frequency can be changed while running
-* HLT input: when high, the clock stops running. Allows electronic control of the clock; if unused,
-  you can tie it to ground. Modifying the design to make this line active low is very easy if desired.
+* Two-mode selector (automatic or single-step) with indicators.
+* Adjustable frequency control (0.7Hz to 480Hz). The frequency can be changed while running.
+* HLT input: When high, the clock stops running. This input allows electronic control of the clock; if unused,
+  you can tie it to ground. Modifying the design to make this line active low is easy if desired.
 * Tiny footprint: fits a quarter-size (170 contact) solder-pad breadboard. Requires a few
   wires soldered on the bottom side.
 * LED indicator of clock cycles.
