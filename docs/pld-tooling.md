@@ -25,6 +25,9 @@ input/output pins.
     These use very different syntaxes to specify the logic definition.
   * For the T48 or TL866, the manufacturer-provided software can do this, although I use 
     [minipro](https://gitlab.com/DavidGriffith/minipro) (Note: I added the T48 support in minipro, and it is still experimental, but it seems to work for me).
+  * **Shortcut**: If you have the JED file and don't plant to change it, you can skip the compilation and go straight to programming.
+    The [JED file for my module is here](https://github.com/siliconchronicles/clock-module/blob/main/cupl/be8clock.jed) (follow the link and click the download button).
+
 
 ## WinCUPL
 
