@@ -10,7 +10,9 @@ I call this a "debugging" clock because it's not meant to run regularly and fast
 it allows me to adjust its speed on the fly (by turning a small knob) and to step-by-step
 the circuit it's connected to.
 
-You can see a quick demo of it in action on [my YouTube channel](https://www.youtube.com/@dmoisset)
+You can see a quick demo of it in action on [my YouTube channel](https://www.youtube.com/watch?v=ZGoPLhaSozs)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ZGoPLhaSozs?si=02fc0bJACHwVjzYZ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 Its main features are:
 
