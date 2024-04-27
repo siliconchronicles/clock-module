@@ -29,7 +29,7 @@ The following schematic reflects the logic built by the CUPL program, and can be
 
 [![SPLD logic schematic](pictures/spld-logic.png)](pictures/spld-logic.png)
 
-Open image in a new tab to zoom in
+Numbers correspond to pin numbers in the U2. You can open the image in a new tab to zoom in.
 
 ### Input signals
 
