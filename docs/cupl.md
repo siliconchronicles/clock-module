@@ -23,6 +23,14 @@ The functionality implemented in this module includes:
 
 ## Implementation details
 
+### Schematic
+
+The following schematic reflects the logic built by the CUPL program, and can be used as reference.
+
+[![SPLD logic schematic](pictures/spld-logic.png)](pictures/spld-logic.png)
+
+Open image in a new tab to zoom in
+
 ### Input signals
 
 The input pins are defined as follows:
