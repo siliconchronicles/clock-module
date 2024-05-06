@@ -34,3 +34,7 @@ I've added some nylon "legs" which are M2 nylon spacers + nylon nuts; but the si
 those may depend on the specific solderable board you use. Those are entirely
 optional.
 
+## Data sheets
+
+* [NE555P](https://www.ti.com/lit/ds/symlink/ne555.pdf) Precision Timer
+* [ATF16V8](https://ww1.microchip.com/downloads/en/devicedoc/atmel-0364-pld-atf16v8b-8bq-8bql-datasheet.pdf) High-performance EE PLD
