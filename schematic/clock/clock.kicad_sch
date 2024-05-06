@@ -6,6 +6,8 @@
 	(paper "A4")
 	(title_block
 		(title "Debug Clock Module")
+		(date "2024-05-06")
+		(company "Silicon Chronicles")
 	)
 	(lib_symbols
 		(symbol "74LS04_1"
